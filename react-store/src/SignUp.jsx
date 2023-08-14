@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import "./SignUp.css";
 
 const SignUp = () => {
@@ -7,9 +8,32 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [passwordR, setPasswordR] = useState("");
   const [accept, setAccept] = useState(false);
-  function submit(e) {
+  const [err, setErr] = useState("");
+  // const [flag, setFlag] = useState(false);
+  async function submit(e) {
+    let flag = false;
     e.preventDefault();
     setAccept(true);
+    if (name === " " || passwordR !== password) {
+      flag = false;
+    } else flag = true;
+    try {
+      if (flag) {
+        // eslint-disable-next-line no-unused-vars
+        let res = await axios.post("http://127.0.0.1:8000/api/register", {
+          name: name,
+          email: email,
+          password: password,
+          password_confirmation: passwordR,
+        });
+        // .then((resp) => console.log(resp.status));
+      }
+    } catch (error) {
+      console.log(error.response.data.message);
+      console.log(error.response.data);
+      setErr(error.response.data.message);
+    }
+    console.log(flag);
   }
   return (
     <div className="parent">
@@ -34,6 +58,9 @@ const SignUp = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          {accept && err === "The email has already been taken." && (
+            <p className="error">Email Is Already Taken ...</p>
+          )}
           <label htmlFor="pass"> Password : </label>
           <input
             id="pass"
@@ -42,8 +69,10 @@ const SignUp = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          {password.length < 5 && accept && (
-            <p className="error">Password Must Be More Than 5 Characters</p>
+          {password.length < 9 && accept && (
+            <p className="error">
+              Password Must Be Equal Or More Than 8 Characters
+            </p>
           )}
           <label htmlFor="rpass"> Repeat Password : </label>
           <input
@@ -66,3 +95,7 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
+// The name field is required.
+// The email field is required.
+// The email has already been taken.
