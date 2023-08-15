@@ -1,12 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
-import "./SignUp.css";
-
-const SignUp = () => {
-  const [name, setName] = useState("");
+import "./Login.css";
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordR, setPasswordR] = useState("");
   const [accept, setAccept] = useState(false);
   const [err, setErr] = useState("");
   // const [flag, setFlag] = useState(false);
@@ -14,17 +11,15 @@ const SignUp = () => {
     let flag = false;
     e.preventDefault();
     setAccept(true);
-    if (name === " " || password.length < 9 || passwordR !== password) {
+    if (password.length < 9) {
       flag = false;
     } else flag = true;
     try {
       if (flag) {
         // eslint-disable-next-line no-unused-vars
-        let res = await axios.post("http://127.0.0.1:8000/api/register", {
-          name: name,
+        let res = await axios.post("http://127.0.0.1:8000/api/login", {
           email: email,
           password: password,
-          password_confirmation: passwordR,
         });
         if (res.status === 200) {
           window.localStorage.setItem("email", email);
@@ -41,19 +36,8 @@ const SignUp = () => {
   }
   return (
     <div className="parent">
-      <div className="register">
+      <div className="login">
         <form onSubmit={submit}>
-          <label htmlFor="name"> Name : </label>
-          <input
-            id="name"
-            type="text"
-            placeholder="Name..."
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          {name === "" && accept && (
-            <p className="error">Username Is Required</p>
-          )}
           <label htmlFor="email"> Email : </label>
           <input
             id="email"
@@ -78,19 +62,8 @@ const SignUp = () => {
               Password Must Be Equal Or More Than 8 Characters
             </p>
           )}
-          <label htmlFor="rpass"> Repeat Password : </label>
-          <input
-            id="rpass"
-            type="password"
-            placeholder="Repeat Password..."
-            value={passwordR}
-            onChange={(e) => setPasswordR(e.target.value)}
-          />
-          {passwordR !== password && accept && (
-            <p className="error">Password Does Not Match</p>
-          )}
           <div style={{ textAlign: "center" }}>
-            <button type="submit">Register</button>
+            <button type="submit">Log In</button>
           </div>
         </form>
       </div>
@@ -98,8 +71,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
-
-// The name field is required.
-// The email field is required.
-// The email has already been taken.
+export default Login;

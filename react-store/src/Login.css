@@ -5,9 +5,9 @@
     height: 70vh;
 }
 
-.parent .register form {
+.parent .login form {
     width: 400px;
-    height: 500px;
+    height: 400px;
     box-shadow: 0px 2px 15px rgb(0 0 0 / 10%);
     padding: 30px;
     display: flex;
@@ -35,14 +35,14 @@ input::placeholder {
     color: rgba(0, 0, 0, 0.3);
 }
 
-.register {
+.login {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 40px;
 }
 
-.register button {
+.login button {
     outline: none;
     border: none;
     background-color: #86b7fe;
@@ -53,10 +53,9 @@ input::placeholder {
     transition: 0.3s;
     border: 2px solid white;
     font-weight: bold;
-    text-decoration: none;
 }
 
-.register button:hover {
+.login button:hover {
     background-color: white;
     border: 2px solid #86b7fe;
     color: #86b7fe;
