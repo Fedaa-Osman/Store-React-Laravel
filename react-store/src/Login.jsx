@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import "./Login.css";
+import Header from "./Components/Header";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,44 +29,47 @@ const Login = () => {
         // .then((resp) => console.log(resp.status));
       }
     } catch (error) {
-      console.log(error.response.data.message);
-      console.log(error.response.data);
+      // console.log(error.response.data.message);
+      // console.log(error.response.data);
       setErr(error.response.data.message);
     }
     console.log(flag);
   }
   return (
-    <div className="parent">
-      <div className="login">
-        <form onSubmit={submit}>
-          <label htmlFor="email"> Email : </label>
-          <input
-            id="email"
-            type="email"
-            placeholder="Email..."
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          {accept && err === "The email has already been taken." && (
-            <p className="error">Email Is Already Taken ...</p>
-          )}
-          <label htmlFor="pass"> Password : </label>
-          <input
-            id="pass"
-            type="password"
-            placeholder="Password..."
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          {password.length < 8 && accept && (
-            <p className="error">
-              Password Must Be Equal Or More Than 8 Characters
-            </p>
-          )}
-          <div style={{ textAlign: "center" }}>
-            <button type="submit">Log In</button>
-          </div>
-        </form>
+    <div>
+      <Header />
+      <div className="parent">
+        <div className="log-in">
+          <form onSubmit={submit}>
+            <label htmlFor="email"> Email : </label>
+            <input
+              id="email"
+              type="email"
+              placeholder="Email..."
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            {accept && err === "The email has already been taken." && (
+              <p className="error">Email Is Already Taken ...</p>
+            )}
+            <label htmlFor="pass"> Password : </label>
+            <input
+              id="pass"
+              type="password"
+              placeholder="Password..."
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {password.length < 8 && accept && (
+              <p className="error">
+                Password Must Be Equal Or More Than 8 Characters
+              </p>
+            )}
+            <div style={{ textAlign: "center" }}>
+              <button type="submit">Log In</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

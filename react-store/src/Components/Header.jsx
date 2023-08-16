@@ -7,12 +7,14 @@ const Header = () => {
     window.location.pathname = "/";
   }
   return (
-    <nav>
-      <div>
-        <h6>Home</h6>
-        <h6>About</h6>
+    <nav className="nav-bar">
+      <div className="nav-left">
+        <ul>
+          <li>Home</li>
+          <li>About</li>
+        </ul>
       </div>
-      <div>
+      <div className="nav-right">
         {!window.localStorage.getItem("email") ? (
           <>
             <Link

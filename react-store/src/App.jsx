@@ -1,15 +1,20 @@
 import { Route, Routes } from "react-router-dom";
-import Header from "./Components/Header";
 import SignUp from "./SignUp";
 import Login from "./Login";
+import Dashboard from "./Dashboard";
+import Home from "./Home";
+import Users from "./Users";
 
 const App = () => {
   return (
     <div>
-      <Header />
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/register" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />}>
+          <Route path="users" element={<Users />} />
+        </Route>
       </Routes>
     </div>
   );
