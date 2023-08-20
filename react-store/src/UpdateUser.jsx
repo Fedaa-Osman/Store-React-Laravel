@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 const UpdateUser = () => {
@@ -7,34 +7,49 @@ const UpdateUser = () => {
   const [password, setPassword] = useState("");
   const [passwordR, setPasswordR] = useState("");
   const [accept, setAccept] = useState(false);
-  const [err, setErr] = useState("");
-  // const [flag, setFlag] = useState(false);
+  // const [err, setErr] = useState("");
+
+  const id = window.location.pathname.split("/").slice(-1);
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1:8000/api/user/showbyid/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setName(data[0].name);
+        setEmail(data[0].email);
+      });
+  }, []);
+
   async function submit(e) {
     let flag = false;
     e.preventDefault();
     setAccept(true);
-    if (name === " " || password.length < 9 || passwordR !== password) {
+    if (name === " " || password.length < 8 || passwordR !== password) {
       flag = false;
     } else flag = true;
     try {
       if (flag) {
         // eslint-disable-next-line no-unused-vars
-        let res = await axios.post("http://127.0.0.1:8000/api/register", {
-          name: name,
-          email: email,
-          password: password,
-          password_confirmation: passwordR,
-        });
+        let res = await axios.post(
+          `http://127.0.0.1:8000/api/user/update/${id}`,
+          {
+            name: name,
+            email: email,
+            password: password,
+            password_confirmation: passwordR,
+          }
+        );
         if (res.status === 200) {
           window.localStorage.setItem("email", email);
-          window.location.pathname = "/";
+          window.location.pathname = "/dashboard/users";
         }
         // .then((resp) => console.log(resp.status));
       }
     } catch (error) {
-      console.log(error.response.data.message);
-      console.log(error.response.data);
-      setErr(error.response.data.message);
+      // console.log(error.response.data.message);
+      // console.log(error.response.data);
+      // setErr(error.response.data.message);
+      console.log("Error");
     }
     console.log(flag);
   }
@@ -62,9 +77,9 @@ const UpdateUser = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            {accept && err === "The email has already been taken." && (
+            {/* {accept && err === "The email has already been taken." && (
               <p className="error">Email Is Already Taken ...</p>
-            )}
+            )} */}
             <label htmlFor="pass"> Password : </label>
             <input
               id="pass"
@@ -90,7 +105,7 @@ const UpdateUser = () => {
               <p className="error">Password Does Not Match</p>
             )}
             <div style={{ textAlign: "center" }}>
-              <button type="submit">Register</button>
+              <button type="submit">Update</button>
             </div>
           </form>
         </div>

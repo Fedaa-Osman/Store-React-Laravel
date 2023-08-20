@@ -31,7 +31,7 @@ class AuthController extends Controller
         $user = User::where('id', $request->id)->update([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => Hash::make($request->password)
         ]);
         return $this->sucess([
             'user' => $user,

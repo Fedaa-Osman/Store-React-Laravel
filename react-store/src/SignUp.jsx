@@ -15,7 +15,7 @@ const SignUp = () => {
     let flag = false;
     e.preventDefault();
     setAccept(true);
-    if (name === " " || password.length < 9 || passwordR !== password) {
+    if (name === " " || password.length < 8 || passwordR !== password) {
       flag = false;
     } else flag = true;
     try {
