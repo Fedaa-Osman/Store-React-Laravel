@@ -4,6 +4,7 @@ import Login from "./Login";
 import Dashboard from "./Dashboard";
 import Home from "./Home";
 import Users from "./Users";
+import UpdateUser from "./UpdateUser";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="users" element={<Users />} />
+          <Route path="users/:id" element={<UpdateUser />} />
         </Route>
       </Routes>
     </div>
