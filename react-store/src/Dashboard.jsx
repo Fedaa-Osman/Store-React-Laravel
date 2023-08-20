@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import SideBar from "./Components/SideBar";
 import TopBar from "./Components/TopBar";
-import "./Dashboard.css";
+import "./assets/Dashboard.css";
 
 const Dashboard = () => {
   return (
@@ -9,9 +9,7 @@ const Dashboard = () => {
       <TopBar />
       <div className="content-flex">
         <SideBar />
-        <div style={{ width: "80%" }}>
-          <Outlet />
-        </div>
+        <Outlet />
       </div>
     </div>
   );

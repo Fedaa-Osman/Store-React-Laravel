@@ -1,13 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
-import "./Login.css";
+import "./assets/Login.css";
 import Header from "./Components/Header";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [accept, setAccept] = useState(false);
   const [err, setErr] = useState("");
-  // const [flag, setFlag] = useState(false);
   async function submit(e) {
     let flag = false;
     e.preventDefault();

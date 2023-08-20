@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import "./SignUp.css";
+import "./assets/SignUp.css";
 import Header from "./Components/Header";
 
 const SignUp = () => {

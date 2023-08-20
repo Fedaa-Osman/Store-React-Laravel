@@ -18,6 +18,7 @@
     border: 2px solid white;
     font-weight: bold;
     text-decoration: none;
+    margin-left: 20px;
 }
 
 .side-bar {
@@ -38,6 +39,14 @@
 
 .content-flex {
     display: flex;
+}
+
+.users-table {
+    padding: 20px;
+}
+
+.p-of-users-table {
+    width: 80%;
 }
 
 .users-table table {
@@ -65,4 +74,27 @@ td {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.fa-user-pen {
+    color: blue;
+    font-size: 20px;
+    margin-right: 30px;
+    cursor: pointer
+}
+
+.fa-user-slash {
+    color: red;
+    font-size: 20px;
+    cursor: pointer
+}
+
+.parent .user-update form {
+    width: 400px;
+    height: 500px;
+    box-shadow: 0px 2px 15px rgb(0 0 0 / 10%);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }

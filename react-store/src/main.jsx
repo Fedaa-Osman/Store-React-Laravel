@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
-import "./index.css";
+import "./assets/index.css";
 import { BrowserRouter } from "react-router-dom";
-import "./Components/all.min.css";
+import "./assets/all.min.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
