@@ -1,61 +1,54 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-// import axios from "axios";
-import Forms from "./Components/Forms";
+import axios from "axios";
+import "../assets/SignUp.css";
 
-const UpdateUser = () => {
+const Forms = (props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [passwordR, setPasswordR] = useState("");
-  // const [accept, setAccept] = useState(false);
-
-  const id = window.location.pathname.split("/").slice(-1);
+  const [password, setPassword] = useState("");
+  const [passwordR, setPasswordR] = useState("");
+  const [accept, setAccept] = useState(false);
+  const [err, setErr] = useState("");
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/user/showbyid/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setName(data[0].name);
-        setEmail(data[0].email);
-      });
-  }, []);
+    setName(props.name);
+    setEmail(props.email);
+  }, [props.name, props.email]);
+  // const [flag, setFlag] = useState(false);
 
-  // async function submit(e) {
-  //   let flag = false;
-  //   e.preventDefault();
-  //   setAccept(true);
-  //   if (name === " " || password.length < 8 || passwordR !== password) {
-  //     flag = false;
-  //   } else flag = true;
-  //   try {
-  //     if (flag) {
-  //       let res = await axios.post(
-  //         `http://127.0.0.1:8000/api/user/update/${id}`,
-  //         {
-  //           name: name,
-  //           email: email,
-  //           password: password,
-  //           password_confirmation: passwordR,
-  //         }
-  //       );
-  //       if (res.status === 200) {
-  //         // window.localStorage.setItem("email", email);
-  //         window.location.pathname = "/dashboard/users";
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.log("Error");
-  //   }
-  //   console.log(flag);
-  // }
+  async function submit(e) {
+    let flag = false;
+    e.preventDefault();
+    setAccept(true);
+    if (name === " " || password.length < 8 || passwordR !== password) {
+      flag = false;
+    } else flag = true;
+    try {
+      if (flag) {
+        // eslint-disable-next-line no-unused-vars
+        let res = await axios.post("http://127.0.0.1:8000/api/register", {
+          name: name,
+          email: email,
+          password: password,
+          password_confirmation: passwordR,
+        });
+        if (res.status === 200) {
+          window.localStorage.setItem("email", email);
+          window.location.pathname = "/";
+        }
+      }
+    } catch (error) {
+      console.log(error.response.data.message);
+      console.log(error.response.data);
+      setErr(error.response.data.message);
+    }
+  }
   return (
     <div>
       <div className="parent">
-        <Forms button="Update" name={name} email={email} />
-        {/* <div className="sign-up">
-          <form
-            style={{ marginTop: "20px", marginLeft: "100px" }}
-            onSubmit={submit}>
+        <div className="sign-up">
+          <form onSubmit={submit}>
             <label htmlFor="name"> Name : </label>
             <input
               id="name"
@@ -75,6 +68,9 @@ const UpdateUser = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
+            {accept && err === "The email has already been taken." && (
+              <p className="error">Email Is Already Taken ...</p>
+            )}
             <label htmlFor="pass"> Password : </label>
             <input
               id="pass"
@@ -100,16 +96,16 @@ const UpdateUser = () => {
               <p className="error">Password Does Not Match</p>
             )}
             <div style={{ textAlign: "center" }}>
-              <button type="submit">Update</button>
+              <button type="submit">{props.button}</button>
             </div>
           </form>
-        </div> */}
+        </div>
       </div>
     </div>
   );
 };
 
-export default UpdateUser;
+export default Forms;
 
 // The name field is required.
 // The email field is required.
