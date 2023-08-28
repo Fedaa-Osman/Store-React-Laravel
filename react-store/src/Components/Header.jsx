@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "../assets/Header.css";
+// import "../assets/Header.css";
 
 const Header = () => {
   function handleLogOut() {
@@ -17,21 +17,15 @@ const Header = () => {
       <div className="nav-right">
         {!window.localStorage.getItem("email") ? (
           <>
-            <Link
-              to="/register"
-              style={{ textAlign: "center" }}
-              className="register-nav">
+            <Link to="/register" className="btn">
               Register
             </Link>
-            <Link
-              to="/login"
-              style={{ textAlign: "center" }}
-              className="register-nav">
+            <Link to="/login" className="btn">
               Log In
             </Link>
           </>
         ) : (
-          <div className="register-nav" onClick={handleLogOut}>
+          <div className="btn" onClick={handleLogOut}>
             Log Out
           </div>
         )}

@@ -1,10 +1,11 @@
 import { Route, Routes } from "react-router-dom";
-import SignUp from "./SignUp";
-import Login from "./Login";
-import Dashboard from "./Dashboard";
-import Home from "./Home";
-import Users from "./Users";
-import UpdateUser from "./UpdateUser";
+import SignUp from "./Pages/Website/Auth/SignUp";
+import Login from "./Pages/Website/Auth/Login";
+import Dashboard from "./Pages/Dashboard/Dashboard";
+import Home from "./Pages/Website/Home";
+import Users from "./Pages/Dashboard/Users/Users";
+import UpdateUser from "./Pages/Dashboard/UpdateUser";
+import CreateUser from "./Pages/Dashboard/Users/CreateUser";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="users" element={<Users />} />
           <Route path="users/:id" element={<UpdateUser />} />
+          <Route path="user/create" element={<CreateUser />} />
         </Route>
       </Routes>
     </div>

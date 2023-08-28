@@ -1,7 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import "./assets/Login.css";
-import Header from "./Components/Header";
+import Header from "../../../Components/Header";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,7 +15,6 @@ const Login = () => {
     } else flag = true;
     try {
       if (flag) {
-        // eslint-disable-next-line no-unused-vars
         let res = await axios.post("http://127.0.0.1:8000/api/login", {
           email: email,
           password: password,
@@ -25,7 +23,6 @@ const Login = () => {
           window.localStorage.setItem("email", email);
           window.location.pathname = "/";
         }
-        // .then((resp) => console.log(resp.status));
       }
     } catch (error) {
       // console.log(error.response.data.message);
@@ -65,7 +62,9 @@ const Login = () => {
               </p>
             )}
             <div style={{ textAlign: "center" }}>
-              <button type="submit">Log In</button>
+              <button type="submit" className="btn">
+                Log In
+              </button>
             </div>
           </form>
         </div>
